@@ -24,32 +24,4 @@ void button_status_changed() {
 void loop() {
   // put your main code here, to run repeatedly:
   attachInterrupt(digitalPinToInterrupt(IN_PIN), &button_status_changed, CHANGE);
-  /*
-  while (true) {
-    digitalWrite(OUT_PIN, LOW);
-      if (digitalRead(IN_PIN) == LOW) {
-          digitalWrite(OUT_PIN, HIGH);
-          Serial.println(IN_PIN);
-      }
-  }
-  */
-    /*
-
-    while (true) {
-      digitalWrite(7, HIGH);
-      delay(500);
-      digitalWrite(7, LOW);
-      delay(500);
-      digitalWrite(7, HIGH);
-      delay(500);
-      digitalWrite(7, LOW);
-      delay(1000);
-      digitalWrite(2, HIGH);
-    }
-
-    int button = digitalRead(2);
-    Serial.println(button);
-
-    delay(1000);
-    */
 }
