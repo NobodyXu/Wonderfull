@@ -9,6 +9,7 @@ void setup() {
   interrupts();
 
   digitalWrite(OUT_PIN, LOW);
+  attachInterrupt(digitalPinToInterrupt(IN_PIN), &button_status_changed, CHANGE);
 }
 
 
@@ -23,5 +24,4 @@ void button_status_changed() {
 
 void loop() {
   // put your main code here, to run repeatedly:
-  attachInterrupt(digitalPinToInterrupt(IN_PIN), &button_status_changed, CHANGE);
 }
