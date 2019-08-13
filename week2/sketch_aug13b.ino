@@ -15,7 +15,7 @@ void setup() {
       digitalWrite(pin, LOW);
   }
 
-  attachInterrupt(digitalPinToInterrupt(IN_PIN), &button_status_changed, CHANGE);
+  attachInterrupt(digitalPinToInterrupt(IN_PIN), &button_status_changed, RISING);
   interrupts();
 }
 
