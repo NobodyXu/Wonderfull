@@ -6,13 +6,17 @@ void setup() {
   pinMode(buzzer, OUTPUT);
 }
 
+unsigned int low = 300;
+unsigned int high = 900;
+unsigned int step = 1;
+
 void loop() {
     // put your main code here, to run repeatedly:
-    unsigned int freq = 700;
-    for (; freq < 960; ++freq) {
+    unsigned int freq = low;
+    for (; freq < high; freq += step) {
       tone(buzzer, freq, 15);
     }
-    for (; freq > 700; --freq) {
+    for (; freq > low; freq -= step) {
       tone(buzzer, freq, 15);
     }
 }
