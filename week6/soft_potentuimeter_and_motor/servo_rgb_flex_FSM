@@ -1,0 +1,136 @@
+#include <Servo.h>
+
+#define servo_pin 9
+#define flex_pin A0
+#define red 6
+#define green 5
+#define blue 3
+
+int angle = 0;
+int servo_state = 0;
+Servo servo;
+
+int flex_value;
+int flex_state = 0;
+
+int rgb_state = 0;
+
+int rgb_start_time;
+int rgb_current_time;
+int servo_start_time;
+int flex_start_time;
+int servo_current_time;
+int flex_current_time;
+
+void setup() {
+  servo.attach(9);    
+  Serial.begin(9600);
+}
+
+void loop() {
+
+  switch (servo_state) {
+
+    case 0:
+      servo_start_time = millis();
+      servo_state = 1;
+      break; 
+    
+    case 1:
+      servo_current_time = millis();
+
+      if(servo_current_time >= (servo_start_time + 2000)) {
+        servo_state = 2; 
+      }
+      break; 
+
+    case 2:
+      if(angle < 180){
+        angle = angle + 30;
+      } else {
+        angle = 0;
+      }
+      servo.write(angle);
+      servo_state = 0;
+      break; 
+    
+  }
+
+  switch (flex_state) {
+    case 0:
+      flex_start_time = millis();
+      flex_state = 1;
+      break;
+
+    case 1:
+      flex_current_time = millis();
+
+      if(flex_current_time >= (flex_start_time + 500)){
+        flex_state = 2;
+      }
+      
+      break;
+    case 2:
+      flex_value = analogRead(flex_pin);
+      Serial.println(flex_value);
+      flex_state = 0;
+      break;
+  
+  }
+
+  switch (rgb_state) {
+    case 0:
+      rgb_start_time = millis();
+      rgb_state = 1;
+      break;
+
+    case 1:
+      rgb_current_time = millis();
+
+      if(rgb_current_time >= rgb_start_time + 300) {
+        rgb_state = 2;
+      }
+      break;
+
+    case 2:
+      digitalWrite(red, LOW);
+      digitalWrite(green, LOW);
+      digitalWrite(blue, HIGH);
+      rgb_state = 3;
+      break;
+
+    case 3:
+      rgb_current_time = millis();
+
+      if(rgb_current_time >= rgb_start_time + 800) {
+        rgb_state = 4;
+      }
+      break;
+
+    case 4:
+      digitalWrite(red, LOW);
+      digitalWrite(green, HIGH);
+      digitalWrite(blue, LOW);
+      rgb_state = 5;
+      break;
+
+    
+    case 5:
+      rgb_current_time = millis();
+
+      if(rgb_current_time >= rgb_start_time + 1200) {
+        rgb_state = 6;
+      }
+      break;
+
+    case 6:
+      digitalWrite(red, HIGH);
+      digitalWrite(green, LOW);
+      digitalWrite(blue, LOW);
+      rgb_state = 0;
+      break;
+  
+  }
+  
+  
+}
