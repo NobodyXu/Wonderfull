@@ -1,3 +1,11 @@
+// Please install https://github.com/maniacbug/StandardCplusplus by first downloading the whole repo as a zip,
+// then goto arudino IDE to install it.
+
+#include <algorithm>
+#include <new>
+#include <utility>
+#include <vector>
+
 template <class T>
 class unique_ptr {
     T *ptr;
