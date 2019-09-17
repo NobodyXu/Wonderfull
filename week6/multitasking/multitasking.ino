@@ -45,9 +45,6 @@ public:
     using time_t = unsigned long long;
 
 protected:
-    // The return value signals whether the events is preserved after callback
-    using callback_t = bool (*)(event&);
-    
     unsigned long long time_left; // in millis
 
     event(time_t scheduled_time):
@@ -59,7 +56,7 @@ protected:
     }
 
 public:
-    bool operator < (const event &other) const {
+    void operator < (const event &other) const {
         return time_left < other.time_left;
     }
 
@@ -120,33 +117,25 @@ public:
         pinMode(pin, OUTPUT);
     }
 
-    bool run_callback() {
+    void run_callback() {
         tone(pin, the_music[i].freq, the_music[i].duration);
         event::time_left = the_music[i].duration;
-        ++i;
-        return true;
+        i = (i + 1) % (sizeof(x) / sizeof(music));
     }
 };
 
 class light_event: public event {
     unsigned pin;
-    bool is_on;
+    bool out;
     
 public:
-    light_event(unsigned pin_to_use) noexcept:
-        event{0}, pin{pin_to_use}, is_on{false]
-    {
-        pinMode(pin, OUTPUT);
-    }
+    light_event(unsigned pin_to_use, bool out_arg) noexcept:
+        event{0}, pin{pin_to_use}, out{out_arg}
+    {}
 
-    bool run_callback() {     
-        if (is_on == false) {
-            digitalWrite(pin, HIGH);
-            is_on = true;
-            event::time_left = 200;
-        } else {
-            digitalWrite(pin, LOW);
-        }
+    void run_callback() {
+        digitalWrite(pin, out);
+        event::time_left = 200;
     }
 }
 
