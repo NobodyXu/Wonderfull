@@ -5,4 +5,7 @@
  * This file will include all other headers under lib/core/.
  */
 
+# include "led.hpp"
+# include "types.hpp"
+
 #endif
