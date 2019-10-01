@@ -1,5 +1,5 @@
-#ifndef  __Wonderfull_project_core_led_HPP__
-# define __Wonderfull_project_core_led_HPP__
+#ifndef  __Wonderfull_project_core_effect_led_HPP__
+# define __Wonderfull_project_core_effect_led_HPP__
 
 # include "types.hpp"
 
