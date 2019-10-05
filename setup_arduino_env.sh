@@ -10,7 +10,7 @@ warn "Before continue, please make sure that neovim is intalled! Press any key t
 mkdir -p ~/Development/
 
 # Clone project repo
-git clone https://github.com/NobodyXu/Wonderfull ~/Development/Wondefull
+git clone https://github.com/NobodyXu/Wonderfull ~/Development/Wonderfull
 
 # Install Arduino-Makefile which is necessary for multi file arduino development.
 git clone https://github.com/sudar/Arduino-Makefile ~/Development/Arduino-Makefile
