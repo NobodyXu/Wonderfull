@@ -15,6 +15,7 @@ namespace core {
  * how should the pin be configured when it is not used.
  */
 class digitalPin_t {
+public:
     enum class Mode: unsigned char {
         input = INPUT,
         input_pullup = INPUT_PULLUP,
