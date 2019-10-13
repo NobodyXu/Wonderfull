@@ -1,20 +1,17 @@
 #include "led.hpp"
-#include <Arduino.h>
 
 namespace core::effect {
 led::led(pin_t pin_arg) noexcept:
-    pin{pin_arg}
-{
-    pinMode(pin, OUTPUT);
-}
+    pin{pin_arg, digitalPin_t::Mode::output}
+{}
 
 led& led::setOn() noexcept {
-    digitalWrite(pin, HIGH);
+    pin.write(digitalPin_t::Level::high);
     return *this;
 }
 
 led& led::setOff() noexcept {
-    digitalWrite(pin, LOW);
+    pin.write(digitalPin_t::Level::low);
     return *this;
 }
 
