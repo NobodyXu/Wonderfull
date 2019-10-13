@@ -1,4 +1,5 @@
 #include "led.hpp"
+#include <Arduino.h>
 
 namespace core::effect {
 led::led(pin_t pin_arg) noexcept:
