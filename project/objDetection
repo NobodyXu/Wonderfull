@@ -29,41 +29,45 @@ void loop()                                  // Main loop auto-repeats
   int irRight = irDetect(4, 5, 38000);            // Check for object on right side
   int irLeft = irDetect(11, 8, 38000);            // Check for object on left side
 
-  Serial.println(irRight);
-  delay(1000);
+//  Serial.println(irRight);
+//  delay(1000);
 
- /* if((irFrontLeft == 0) && (irFrontRight == 0))        // If both front sides detect
+ if((irFrontLeft == 0) && (irFrontRight == 0))        // If both front sides detect
   {
     if((irRight == 0) && (irLeft == 1)){          // If Right side detects
+      backward(100);
+      delay(10);
       turnLeft(600);                              // Turn Left 90 degrees
-      
     }else if((irRight == 1) && (irLeft == 0)){    // If Left side detects
+      backward(100);
+      delay(10);
       turnRight(600);                             // Turn Right 90 degrees
-      forward(20);
     }else if((irRight == 1) && (irLeft == 1)){    // If both sides do not detect
+      backward(100);
+      delay(10);
       turnLeft(600);                              // Turns 90 degrees to a side an continues
-      
     }else{                                        // If both sides detect (Robot reached a dead end)
-      turnLeft(1200);                             // Turns 180 degrees and continues
+      turnLeft(1150);                             // Turns 180 degrees and continues
       
       // Or maybe a signal that passes the control to the joystick in the controller.
     }
     
   }
-  else if(irFrontLeft == 0 && irFrontRight == 1)                       // If only left side detects
-  {
-    backward(1000);                          // Back up 1 second
-    turnRight(400);                          // Turn right about 60 degrees
-  }
-  else if(irFrontRight == 0 && irFrontLeft == 1)                      // If only right side detects
-  {
-    backward(1000);                          // Back up 1 second
-    turnLeft(400);                           // Turn left about 60 degrees
-  }
+  // create condition where 1 og them is detected, move 20 degrees 
+//  else if(irFrontLeft == 0 && irFrontRight == 1)                       // If only left side detects
+//  {
+//    backward(1000);                          // Back up 1 second
+//    turnRight(400);                          // Turn right about 60 degrees
+//  }
+//  else if(irFrontRight == 0 && irFrontLeft == 1)                      // If only right side detects
+//  {
+//    backward(1000);                          // Back up 1 second
+//    turnLeft(400);                           // Turn left about 60 degrees
+//  }
   else                                       // Otherwise, no IR detected
   {
     forward(20);                             // Forward 1/50 of a second
-  }*/
+  }
 }
 
 int irDetect(int irLedPin, int irReceiverPin, long frequency)
