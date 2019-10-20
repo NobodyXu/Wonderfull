@@ -7,7 +7,7 @@ static constexpr const inline bool is_signed_v = false;
 
 # define DEF_SPECIALIZATION(type)                           \
 template <>                                                 \
-static constexpr const inline bool is_signed_v<type> = true
+constexpr const inline bool is_signed_v<type> = true
 
 DEF_SPECIALIZATION(signed char);
 DEF_SPECIALIZATION(signed short);
