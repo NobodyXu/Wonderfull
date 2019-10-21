@@ -82,7 +82,7 @@ void Bluetooth::setupBlueToothConnection(const char *mode, const char *Cmd_str, 
     Cmd += shieldPairNumber;
     Cmd += "\r\n";
  
-    print("\r\n+STWMOD=", mode, "\r\n");      // Set the Bluetooth to work in master mode
+    print("\r\n+STWMOD=", mode, "\r\n");      // Set the Bluetooth master mode
     print(Cmd);                      // Set the bluetooth name using masterNameCmd
     print("\r\n+STAUTO=0\r\n");      // Auto-connection is forbidden here
     print(AdditionalConfigurationCmd);
