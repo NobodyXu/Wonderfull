@@ -36,29 +36,35 @@ void loop()                                  // Main loop auto-repeats
       moveBack(100);
       delay(10);
       turnLeft(600);                              // Turn Left 90 degrees
+      delay(10);
     }else if((irRight == 1) && (irLeft == 0)){    // If Left side detects
       moveBack(100);
       delay(10);
       turnRight(600);                             // Turn Right 90 degrees
+      delay(10);
     }else if((irRight == 1) && (irLeft == 1)){    // If both sides do not detect
       moveBack(100);
       delay(10);
       turnLeft(600);                              // Turns 90 degrees to a side an continues
+      delay(10);
     }else{                                        // If both sides detect (Robot reached a dead end)
+      moveBack(100);
+      delay(10);
       turnLeft(1150);                             // Turns 180 degrees and continues
+      delay(10);
     }
     
   }
   // create condition where 1 og them is detected, move 20 degrees 
 //  else if(irFrontLeft == 0 && irFrontRight == 1)                       // If only left side detects
 //  {
-//    moveBack(1000);                          // Back up 1 second
-//    turnRight(400);                          // Turn right about 60 degrees
+//    moveBack(100);                          // Back up
+//    turnRight(150);                          // Turn right about 20 degrees
 //  }
 //  else if(irFrontRight == 0 && irFrontLeft == 1)                      // If only right side detects
 //  {
-//    moveBack(1000);                          // Back up 1 second
-//    turnLeft(400);                           // Turn left about 60 degrees
+//    moveBack(100);                          // Back up
+//    turnLeft(150);                           // Turn left about 20 degrees
 //  }
   else                                       // Otherwise, no IR detected
   {
