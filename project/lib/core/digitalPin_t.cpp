@@ -1,12 +1,21 @@
 #include "digitalPin_t.hpp"
+#include "../meta/integral_limit.hpp"
 
 #include <Arduino.h>
 
 namespace core {
+digitalPin_t::digitalPin_t() noexcept:
+    pin{meta::integral_limit<pin_t>::maximum()}
+{}
+
 digitalPin_t::digitalPin_t(pin_t pin_arg, Mode mode) noexcept:
     pin{pin_arg}
 {
     pinMode(pin, static_cast<int>(mode));
+}
+
+bool digitalPin_t::is_valid_pin() const noexcept {
+    return pin != meta::integral_limit<pin_t>::maximum();
 }
 
 auto digitalPin_t::read() const noexcept -> Level {

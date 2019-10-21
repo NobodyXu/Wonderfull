@@ -31,7 +31,19 @@ private:
     pin_t pin;
 
 public:
+    /*!
+     * Default-initailizer will returns an object that is not 
+     * usable, but rather as a placeholder.
+     *
+     * This is usefull for optional digital pin.
+     */
+    digitalPin_t() noexcept;
     digitalPin_t(pin_t pin_arg, Mode mode) noexcept;
+
+    /*!
+     * Check whether it contains a valid pin.
+     */
+    bool is_valid_pin() const noexcept;
 
     Level read() const noexcept;
     void write(Level) const noexcept;
