@@ -5,7 +5,7 @@ BOARD_TAG := uno
 print-% : ; @echo $* = $($*)
 
 USER_LIB_PATH := $(realpath ./lib)
-ARDUINO_LIBS := core meta SoftwareSerial
+ARDUINO_LIBS := core meta SoftwareSerial Servo
 CXXFLAGS_STD := -std=c++17 -flto
 
 include $(ARDMKFILE)
