@@ -17,20 +17,12 @@ class SoftSerial {
 public:
     SoftSerial(pin_t RxD, pin_t TxD, unsigned bitrate);
 
-    bool is_available() ;
+    bool is_available();
 
     /*!
-     * read in one character, blocks if !is_available().
+     * read in one character, blocks if is_available() == false.
      */
-    char read();
-
-    /*!
-     * This is a *blocking* call utilizing read().
-     *
-     * Read characters into the buffer until !F(buffer).
-     */
-    template <class F>
-    auto read(F &&f) -> String;
+    char getchar();
 
     void print() noexcept {}
 
@@ -42,17 +34,6 @@ public:
 
     void flush();
 };
-
-template <class F>
-auto SoftSerial::read(F &&f) -> String {
-    String buffer;
-
-    do {
-        buffer += read();
-    } while (!f(buffer));
-    
-    return buffer;
-}
 
 template <class T, class ...Ts>
 void SoftSerial::print(T &&obj, Ts &&...objs) {
