@@ -11,7 +11,7 @@ bool SoftSerial::is_available() {
     return serial.available();
 }
 
-char SoftSerial::getchar() {
+char SoftSerial::getChar() {
     while (!is_available())
         /* block */;
     return serial.read();

@@ -22,7 +22,7 @@ public:
     /*!
      * read in one character, blocks if is_available() == false.
      */
-    char getchar();
+    char getChar();
 
     void print() noexcept {}
 
