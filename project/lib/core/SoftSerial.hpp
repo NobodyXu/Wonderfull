@@ -15,24 +15,14 @@ class SoftSerial {
     SoftwareSerial serial;
 
 public:
-    SoftSerial(pin_t RxD, pin_t TxD, unsigned bitrate):
-        serial{RxD, TxD}
-    {
-        serial.begin(bitrate);
-    }
+    SoftSerial(pin_t RxD, pin_t TxD, unsigned bitrate);
 
-    bool is_available() {
-        return serial.available();
-    }
+    bool is_available() ;
 
     /*!
      * read in one character, blocks if !is_available().
      */
-    char read() {
-        while (!is_available())
-            /* block */;
-        return serial.read();
-    }
+    char read();
 
     /*!
      * This is a *blocking* call utilizing read().
@@ -63,9 +53,7 @@ public:
         print(objs..., '\n');
     }
 
-    void flush() {
-        serial.flush();
-    }
+    void flush();
 };
 } /* namespace core::Comm */
 
