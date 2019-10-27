@@ -7,6 +7,10 @@
 # include <SoftwareSerial.h>
 
 namespace core::Comm {
+/*!
+ * This is a wrapper over SoftwareSerial,
+ * to make using it easier.
+ */
 class SoftSerial {
     SoftwareSerial serial;
 
