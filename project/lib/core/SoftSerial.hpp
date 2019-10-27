@@ -30,31 +30,40 @@ public:
      * Read characters into the buffer until !F(buffer).
      */
     template <class F>
-    auto read(F &&f) -> String {
-        String buffer;
-
-        do {
-            buffer += read();
-        } while (!f(buffer));
-        
-        return buffer;
-    }
+    auto read(F &&f) -> String;
 
     void print() noexcept {}
 
     template <class T, class ...Ts>
-    void print(T &&obj, Ts &&...objs) {
-        serial.print(obj);
-        print(objs...);
-    }
+    void print(T &&obj, Ts &&...objs);
 
     template <class ...Ts>
-    void println(Ts &&...objs) {
-        print(objs..., '\n');
-    }
+    void println(Ts &&...objs);
 
     void flush();
 };
+
+template <class F>
+auto SoftSerial::read(F &&f) -> String {
+    String buffer;
+
+    do {
+        buffer += read();
+    } while (!f(buffer));
+    
+    return buffer;
+}
+
+template <class T, class ...Ts>
+void SoftSerial::print(T &&obj, Ts &&...objs) {
+    serial.print(obj);
+    print(objs...);
+}
+
+template <class ...Ts>
+void SoftSerial::println(Ts &&...objs) {
+    print(objs..., '\n');
+}
 } /* namespace core::Comm */
 
 #endif
