@@ -33,4 +33,12 @@ void Bluetooth::info() {
     issue_command(*this, "AT+ROLE?");
     issue_command(*this, "AT+ADDR?");
 }
+
+/*!
+ * Since XC4382 by default is set as slave, nothing is required 
+ * to be done here.
+ */
+void Bluetooth::as_slave() {
+    ;
+}
 } /* namespace core::Comm */

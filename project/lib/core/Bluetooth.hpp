@@ -54,7 +54,11 @@ public:
      */
     void info();
 
-    //void connect_to_slave(int shieldPairNumber);
+    /*!
+     * as_slave() will set the device as slave and make
+     * it ready to be query
+     */
+    void as_slave();
     //void connect_to_master(int shieldPairNumber);
 };
 } /* namespace core::Comm */
