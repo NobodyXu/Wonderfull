@@ -73,6 +73,15 @@ public:
     }
 
     /*!
+     * forward input of *this to s until is_available() == false
+     */
+    template <class T>
+    void forward(Serial<T> &s) {
+        while (is_available())
+            s.print(getChar_noblock());
+    }
+
+    /*!
      * read(cnt) is for reading `cnt` number of characters
      * into the buffer and return it.
      */
