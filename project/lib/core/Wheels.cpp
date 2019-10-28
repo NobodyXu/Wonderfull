@@ -8,28 +8,24 @@ Wheels::Wheels(pin_t left_pin, pin_t right_pin) noexcept {
     right.attach(right_pin, 1000, 2000);
 }
 
-void Wheels::moveForward(int time) {
+void Wheels::moveForward() {
     left.writeMicroseconds(1700);         // Left wheel turns counterclockwise
     right.writeMicroseconds(1300);        // Right wheel turns clockwise
-    delay(time);                               // Move for time ms
 }
 
-void Wheels::moveBackward(int time) {
+void Wheels::moveBackward() {
     left.writeMicroseconds(1300);         // Left wheel turns clockwise
     right.writeMicroseconds(1700);        // Right wheel  turns counterclockwise
-    delay(time);                               // Move for time ms
 }
 
-void Wheels::turnLeft(int time) {
+void Wheels::turnLeft() {
     left.writeMicroseconds(1300);         // Left wheel turns clockwise
     right.writeMicroseconds(1300);        // Right wheel turns clockwise
-    delay(time);                               // Move for time ms
 }
 
-void Wheels::turnRight(int time) {
+void Wheels::turnRight() {
     left.writeMicroseconds(1700);         // Left wheel turns counterclockwise
     right.writeMicroseconds(1700);        // Right wheel turns counterclockwise
-    delay(time);                               // Move for time ms
 }
 
 Wheels::~Wheels() noexcept {

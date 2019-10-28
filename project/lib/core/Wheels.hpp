@@ -14,10 +14,10 @@ class Wheels {
 public:
     Wheels(pin_t left_pin, pin_t right_pin) noexcept; 
 
-    void moveForward(int time);
-    void moveBackward(int time);
-    void turnLeft(int time);
-    void turnRight(int time);
+    void moveForward();
+    void moveBackward();
+    void turnLeft();
+    void turnRight();
 
     ~Wheels() noexcept;
 };
