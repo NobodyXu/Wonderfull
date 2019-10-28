@@ -5,57 +5,85 @@
 #ifndef  __Wonderfull_project_core_Serial_HPP__
 # define __Wonderfull_project_core_Serial_HPP__
 
-/*!
- * is_avilable(serial) test whether serial has the next byte available.
- */
+# include "digitalPin_t.hpp"
+# include <Arduino.h>
+
+namespace core::Comm {
 template <class Serial_t>
-bool is_available(Serial_t &&serial) {
-    return serial.available();
-}
+class Serial {
+    Serial_t serial;
 
-/*!
- * getChar(serial) is a blocking function call.
- * It will block until is_avilable(serial) == true and then
- * convert serial.read() to type char so that it can be latter printed.
- */
-template <class Serial_t>
-char getChar(Serial_t &&serial) {
-    while (!is_available(serial))
-        /* block */;
+public:
+    Serial() = delete;
+    Serial(const Serial&) = delete;
+    Serial(Serial&&) = delete;
 
-    return serial.read();
-}
+    Serial& operator = (const Serial&) = delete;
+    Serial& operator = (Serial&&) = delete;
 
-/*!
- * print(serial, objs...) will print all objects to serial.
- */
-template <class Serial_t, class T, class ...Ts>
-void print(Serial_t &&serial, T && t, Ts &&...ts);
+    Serial(pin_t RxD, pin_t TxD):
+        serial{RxD, TxD}
+    {}
 
-/*!
- * base case of recursion:
- *     no arguments is supplied (they are exhausted by recursion)
- */
-template <class Serial_t>
-void print(Serial_t &&serial) {}
+    /*!
+     * This is for makeHardwareSerial
+     */
+    Serial(HardwareSerial &s):
+        serial{s}
+    {}
 
-/*!
- * recursion body
- */
-template <class Serial_t, class T, class ...Ts>
-void print(Serial_t &&serial, T &&t, Ts &&...ts) {
-    serial.print(t);
-    // Recursion
-    print(serial, ts...);
-}
+    void begin(unsigned rate) {
+        serial.begin(rate);
+    }
 
-/*!
- * println(serial, objs...) will print all objs to serial, along
- * with a trailing newline.
- */
-template <class Serial_t, class ...Ts>
-void println(Serial_t &&serial, Ts &&...ts) {
-    print(serial, ts..., '\n');
-}
+    /*!
+     * is_avilable() test whether serial has the next byte available.
+     */
+    bool is_available() {
+        return serial.available();
+    }
+    
+    /*!
+     * getChar() is a blocking function call.
+     * It will block until is_avilable(serial) == true and then
+     * convert serial.read() to type char so that it can be latter printed.
+     */
+    char getChar() {
+        while (!is_available())
+            /* block */;
+    
+        return serial.read();
+    }
+    
+    /*!
+     * print(objs...) will print all objects to serial.
+     */
+    template <class T, class ...Ts>
+    void print(T &&t, Ts &&...ts) {
+        serial.print(t);
+        // Recursion
+        print(ts...);
+    }
+    
+    /*!
+     * base case of recursion:
+     *     no arguments is supplied (they are exhausted by recursion)
+     */
+    void print() {}
+    
+    /*!
+     * println(serial, objs...) will print all objs to serial, along
+     * with a trailing newline.
+     */
+    template <class ...Ts>
+    void println(Ts &&...ts) {
+        print(ts..., '\n');
+    }
+
+    void flush() {
+        serial.flush();
+    }
+};
+} /* namespace core::Comm */
 
 #endif
