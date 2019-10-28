@@ -51,8 +51,21 @@ public:
     char getChar() {
         while (!is_available())
             /* block */;
-    
+
         return serial.read();
+    }
+
+    /*!
+     * read(cnt) is for reading `cnt` number of characters
+     * into the buffer and return it.
+     */
+    String read(unsigned cnt) {
+        String ret;
+
+        for (unsigned i = 0; i != cnt; ++i)
+            ret += getChar();
+
+        return ret;
     }
     
     /*!

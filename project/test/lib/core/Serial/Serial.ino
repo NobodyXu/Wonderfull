@@ -10,6 +10,13 @@ void setup() {
 }
 
 void loop() {
-    serial.println("Enter anything to test the echo: ");
-    serial.println(serial.getChar());
+    for (int i = 0; i != 10; ++i) {
+        serial.println("Enter anything to test the echo: ");
+        serial.println(serial.getChar());
+    }
+
+    for (int i = 0; i != 10; ++i) {
+        serial.println("Enter string here to test read(10): ");
+        serial.println(serial.read(10));
+    }
 }
