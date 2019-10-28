@@ -59,7 +59,12 @@ public:
      * it ready to be query
      */
     void as_slave();
-    //void connect_to_master(int shieldPairNumber);
+    /*!
+     * Returns 0  for success,
+     *         -1 for error,
+     *         1  for failure.
+     */
+    int as_master(const char *slave_macAddress);
 };
 } /* namespace core::Comm */
 

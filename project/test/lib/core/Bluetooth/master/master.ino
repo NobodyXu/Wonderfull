@@ -1,26 +1,34 @@
-#include "bluetooth.hpp"
+#include "Bluetooth.hpp"
+#include "serial.hpp"
 
 void setup() {
     // Wait for serial monitor to be opened
     delay(20000);
-    Serial.begin(9600);
-    Serial.println("Serial initialized...");
+    serial.begin(9600);
+    serial.println("Serial initialized...");
 }
 
-
 void loop() {
-    Serial.println("Start to initialize bluetooth...");
-    auto master = core::Control::Bluetooth::master(6, 7, A1, 1);
-    Serial.println("Bluetooth is ready...");
+    serial.println("Start to initialize bluetooth...");
+    auto master = core::Comm::Bluetooth{8, 7, 4};
+
+    serial.println("Testing bluetooth...");
+    master.info();
+
+    int ret;
+    do {
+        serial.println("Trying to make the connection...");
+        ret = master.as_master("1862E43DF32F");
+    } while (ret != 0);
+
+    delay(2000);
+    serial.println("Bluetooth is ready...");
 
     while (1) {
-        if(master.is_available())
-            Serial.print(master.read());
+        if (serial.is_available())
+            master.print(serial.getChar_noblock());
 
-        if(Serial.available()) {
-            auto recvChar  = Serial.read();
-            Serial.print(recvChar);
-            master.print(recvChar);
-        }
+        if (master.is_available())
+            serial.print(master.getChar_noblock());
     }
 }
