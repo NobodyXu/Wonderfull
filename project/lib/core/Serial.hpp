@@ -42,6 +42,25 @@ public:
     bool is_available() {
         return serial.available();
     }
+
+    /*!
+     * wait_for_available() blocks until the next byte is available.
+     */
+    void wait_for_available() {
+        while (!is_available())
+            /* block */;
+    }
+
+    /*!
+     * getChar() is a non-block function call.
+     * It will convert serial.read() to type char so that it can be latter printed.
+     *
+     * Precondition:
+     *     is_available() == true.
+     */
+    char getChar_noblock() {
+        return serial.read();
+    }
     
     /*!
      * getChar() is a blocking function call.
@@ -49,10 +68,8 @@ public:
      * convert serial.read() to type char so that it can be latter printed.
      */
     char getChar() {
-        while (!is_available())
-            /* block */;
-
-        return serial.read();
+        wait_for_available();
+        return getChar_noblock();
     }
 
     /*!
