@@ -76,7 +76,7 @@ public:
      * forward input of *this to s until is_available() == false
      */
     template <class T>
-    void forward(Serial<T> &s) {
+    void forward(T &s) {
         while (is_available())
             s.print(getChar_noblock());
     }
