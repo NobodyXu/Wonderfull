@@ -8,8 +8,6 @@
 namespace core::Comm {
 /*!
  * Bluetooth for XC4382.
- *
- * Please define this variable inside loop(), not as global variable.
  */
 class Bluetooth: private Serial<SoftwareSerial> {
     digitalPin_t reset;
