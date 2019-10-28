@@ -8,10 +8,15 @@ void setup() {
 
 void loop() {
     auto bluetooth = core::Comm::Bluetooth{8, 7, 4};
+    serial.println("Testing bluetooth module...");
+    bluetooth.info();
+    serial.println("Test done, start waiting for connection...");
+
 
     while (true) {
-        bluetooth.info();
-        serial.println("Enter anything to continue...");
-        serial.getChar();
+        if (bluetooth.is_available()) {
+            bluetooth.print(bluetooth.getChar_noblock());
+            bluetooth.flush();
+        }
     }
 }
