@@ -12,8 +12,16 @@ class Wheels {
     Servo right;
 
 public:
-    Wheels(pin_t left_pin, pin_t right_pin) noexcept; 
+    // 1536 is the value which the left stops
+    static const int left_central_v = 1537;
+    // 1530 is the value which the left stops
+    static const int right_central_v = 1530;
 
+    Wheels() noexcept; 
+
+    void attach(pin_t left_pin, pin_t right_pin);
+
+    void stayStill();
     void moveForward();
     void moveBackward();
     void turnLeft();
