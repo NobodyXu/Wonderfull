@@ -7,10 +7,10 @@ namespace core::Sensor {
 class Infrared {
     digitalPin_t irLed;
     digitalPin_t irReceiver;
-    int frequency;
+    unsigned long frequency;
 
 public:
-    Infrared(pin_t irLedPin, pin_t irReceiverPin, int freq) noexcept;
+    Infrared(pin_t irLedPin, pin_t irReceiverPin, unsigned long freq) noexcept;
 
     bool has_obstacles() const noexcept;
 };

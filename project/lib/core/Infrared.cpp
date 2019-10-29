@@ -1,7 +1,7 @@
 #include "Infrared.hpp"
 
 namespace core::Sensor {
-Infrared::Infrared(pin_t irLedPin, pin_t irReceiverPin, int freq) noexcept:
+Infrared::Infrared(pin_t irLedPin, pin_t irReceiverPin, unsigned long freq) noexcept:
     irLed{irLedPin, digitalPin_t::Mode::output}, 
     irReceiver{irReceiverPin, digitalPin_t::Mode::input},
     frequency{freq}
