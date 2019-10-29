@@ -12,6 +12,6 @@ bool Infrared::has_obstacles() const noexcept {
   delay(1);                               // Wait 1 ms
   auto ir = irReceiver.read();            // IR receiver -> ir variable
   delay(1);                               // Down time before recheck
-  return ir == digitalPin_t::Level::high; // Return 1 no detect, 0 detect
+  return ir == digitalPin_t::Level::low; // Return 1 no detect, 0 detect
 }
 } /* namespace core::Sensor */
