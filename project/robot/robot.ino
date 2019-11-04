@@ -6,9 +6,7 @@
 core::Comm::Bluetooth slave{10, 9, 8};
 core::Motive::Wheels wheels{};
 
-//core::Sensor::Infrared infraredFront{2, 3, 38000};
-//core::Sensor::Infrared infraredRight{4, 5, 38000};
-//core::Sensor::Infrared infraredLeft{6, 7, 38000};
+core::Sensor::Infrared infraredFront{2};
 
 void setup() {
     wheels.attach(13, 12);
@@ -61,6 +59,10 @@ motor_coroutine motor_co{};
 
 void loop() {
     motor_co.run();
+
+    if (infraredFront.has_obstacles()) {
+        slave.print('F');
+    }
 
     /*
     if (infraredFront.has_obstacles()) {

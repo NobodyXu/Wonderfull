@@ -1,13 +1,15 @@
 #include "Bluetooth.hpp"
 #include "joystick.hpp"
 #include "serial.hpp"
-#include "RGB.hpp"
+#include "led.hpp"
+//#include "RGB.hpp"
 
 auto master = core::Comm::Bluetooth{10, 9, 8};
 auto joystick = core::Control::joystick{A5, A4, 2};
-auto frontRGB = core::Effect::RGB{4, 3, A0};
-auto leftRGB = core::Effect::RGB{12, 13, A0};
-auto rightRGB = core::Effect::RGB{11, 1, A0};
+auto led = core::effect::led{4};
+//auto frontRGB = core::Effect::RGB{4, 3, A0};
+//auto leftRGB = core::Effect::RGB{12, 13, A0};
+//auto rightRGB = core::Effect::RGB{11, 1, A0};
 
 void setup() {
     // Wait for serial monitor to be opened
@@ -55,6 +57,13 @@ void loop() {
 
     if (positions.get(dir::x) == pos::deadzone && positions.get(dir::y) == pos::deadzone) {
         master.print('S');
+    }
+
+    if (master.is_available()) {
+        if (master.getChar_noblock() == 'F')
+            led.setOn();
+        else
+            led.setOff();
     }
 
     /*
