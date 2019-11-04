@@ -6,9 +6,9 @@
 core::Comm::Bluetooth slave{10, 9, 8};
 core::Motive::Wheels wheels{};
 
-core::Sensor::Infrared infraredFront{2, 3, 38000};
-core::Sensor::Infrared infraredRight{4, 5, 38000};
-core::Sensor::Infrared infraredLeft{6, 7, 38000};
+//core::Sensor::Infrared infraredFront{2, 3, 38000};
+//core::Sensor::Infrared infraredRight{4, 5, 38000};
+//core::Sensor::Infrared infraredLeft{6, 7, 38000};
 
 void setup() {
     wheels.attach(13, 12);
@@ -16,23 +16,51 @@ void setup() {
     delay(500);
 }
 
-void loop() {
-    if (slave.is_available()) {
-        auto ch = slave.getChar_noblock();
-        if (ch == 'F') {
-            wheels.moveForward();
-        } else if (ch == 'B') {
-            wheels.moveBackward();
-        } else if (ch == 'L') {
-            wheels.turnLeft();
-        } else if (ch == 'R') {
-            wheels.turnRight();
-        } else if (ch == 'S') {
-            wheels.stayStill();
-        }
+class motor_coroutine {
+    unsigned long long last_motor_ms = 0;
+    
+public:
+    motor_coroutine() {}
 
-        delay(25);
+    void run() {
+        unsigned long long curr_time = millis();
+
+        // Wait for 25 ms before making another move.
+        if (curr_time - last_motor_ms < 25)
+            return;
+
+        if (slave.is_available()) {
+            switch (slave.getChar_noblock()) {
+                case 'F':
+                    wheels.moveForward();
+                    break;
+
+                case 'B':
+                    wheels.moveBackward();
+                    break;
+
+                case 'L':
+                    wheels.turnLeft();
+                    break;
+
+                case 'R':
+                    wheels.turnRight();
+                    break;
+
+                case 'S':
+                    wheels.stayStill();
+            }
+        } else
+            return;
+
+        last_motor_ms = millis();
     }
+};
+
+motor_coroutine motor_co{};
+
+void loop() {
+    motor_co.run();
 
     /*
     if (infraredFront.has_obstacles()) {
