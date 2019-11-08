@@ -17,3 +17,7 @@ echo 'export ARDMK_DIR=${HOME}/Development/Arduino-Makefile'                 >> 
 echo 'export ARDMKFILE=${ARDMK_DIR}/Arduino.mk'                              >> ${HOME}/.bashrc
 echo 'export AVR_TOOLS_DIR=${HOME}/.local/arduino-1.8.10/hardware/tools/avr' >> ${HOME}/.bashrc
 echo 'export PATH=${AVR_TOOLS_DIR}/bin:$PATH' >> ${HOME}/.bashrc
+
+# Install software for burning arduino
+pip install --user pyserial
+echo 'export PATH=${HOME}/.local/bin:$PATH' >> ${HOME}/.bashrc
