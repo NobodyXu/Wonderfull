@@ -2,6 +2,12 @@
 
 mkdir -p ~/Development/
 
+# Install arduino ide as it is required by Arduino-Makefile
+cd /tmp && wget https://downloads.arduino.cc/arduino-1.8.10-linux64.tar.xz
+mkdir -p ~/.local/arduino-1.8.10
+## Extract it
+cd ~/.local/arduino-1.8.10 && tar xf /tmp/arduino-1.8.10-linux64.tar.xz
+
 # Install Arduino-Makefile which is necessary for multi file arduino development.
 git clone https://github.com/sudar/Arduino-Makefile ~/Development/Arduino-Makefile
 
