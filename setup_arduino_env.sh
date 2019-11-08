@@ -15,15 +15,12 @@ git clone https://github.com/NobodyXu/Wonderfull ~/Development/Wonderfull
 # Install Arduino-Makefile which is necessary for multi file arduino development.
 git clone https://github.com/sudar/Arduino-Makefile ~/Development/Arduino-Makefile
 
-cat >> ~/.bashrc << EOF
 # This is for arduino development environment
-export ARDUINO_DIR=${HOME}/.local/arduino-1.8.10
-export ARDMK_DIR=${HOME}/Development/Arduino-Makefile
-export ARDMKFILE=${ARDMK_DIR}/Arduino.mk
-export AVR_TOOLS_DIR=${HOME}/.local/arduino-1.8.10/hardware/tools/avr
-
-export PATH=${AVR_TOOLS_DIR}/bin:$PATH
-EOF
+echo 'export ARDUINO_DIR=${HOME}/.local/arduino-1.8.10'                      >> ${HOME}/.bashrc
+echo 'export ARDMK_DIR=${HOME}/Development/Arduino-Makefile'                 >> ${HOME}/.bashrc
+echo 'export ARDMKFILE=${ARDMK_DIR}/Arduino.mk'                              >> ${HOME}/.bashrc
+echo 'export AVR_TOOLS_DIR=${HOME}/.local/arduino-1.8.10/hardware/tools/avr' >> ${HOME}/.bashrc
+echo 'export PATH=${AVR_TOOLS_DIR}/bin:$PATH' >> ${HOME}/.bashrc
 
 # Install nvim-as-ide
 git clone https://github.com/NobodyXu/nvim-as-ide ~/Development/nvim-as-ide
